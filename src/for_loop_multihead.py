@@ -32,8 +32,11 @@ class AttHead(nn.Module):
         return x
 
 class MultiHeadAtt(nn.Module):
-    def __init__(self, emb_dim, head_size, n_heads):
+    def __init__(self, emb_dim, n_heads):
         super().__init__()
+
+        assert emb_dim % n_heads == 0
+        head_size = emb_dim // n_heads
 
         self.heads = nn.ModuleList([AttHead(emb_dim, head_size) for _ in range(n_heads)])
         self.proj = nn.Linear(emb_dim, emb_dim) # projection to the residual connetion
