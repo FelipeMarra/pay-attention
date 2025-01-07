@@ -8,11 +8,11 @@ import torch.nn as nn
 from torch.nn import functional as F
 
 class AttHead(nn.Module):
-    def __init__(self, emd_dim, head_size):
+    def __init__(self, emb_dim, head_size):
         super().__init__()
-        self.wq = nn.Linear(emd_dim, head_size, bias=False)
-        self.wk = nn.Linear(emd_dim, head_size, bias=False)
-        self.wv = nn.Linear(emd_dim, head_size, bias=False)
+        self.wq = nn.Linear(emb_dim, head_size, bias=False)
+        self.wk = nn.Linear(emb_dim, head_size, bias=False)
+        self.wv = nn.Linear(emb_dim, head_size, bias=False)
         self.dropout = nn.Dropout(0.1)
 
     def forward(self, x:torch.Tensor) -> torch.Tensor:
